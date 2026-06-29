@@ -523,12 +523,12 @@ body::before {
   background: linear-gradient(90deg, transparent, rgba(124,140,90,.5), transparent);
 }
 
-.menu-card.youth {
+.menu-card.kids {
   background: linear-gradient(145deg, rgba(184,169,201,.12) 0%, rgba(212,197,226,.08) 100%);
   border: 1px solid rgba(184,169,201,.25);
 }
 
-.menu-card.youth::before {
+.menu-card.kids::before {
   background: linear-gradient(90deg, transparent, rgba(184,169,201,.5), transparent);
 }
 
@@ -556,7 +556,7 @@ body::before {
   font-weight: 300;
 }
 
-.menu-card.youth .menu-price { color: var(--lav-d); }
+.menu-card.kids .menu-price { color: var(--lav-d); }
 
 /* ══════════════════════════════════════
    SWATCHES (DRESS CODE)
@@ -932,8 +932,8 @@ body::before {
 
 .msb.a { background: rgba(124,140,90,.08); color: var(--sage-d); border-color: rgba(124,140,90,.2); }
 .msb.a.on { background: linear-gradient(135deg, var(--sage-l), var(--sage)); color: #fff; box-shadow: 0 2px 8px rgba(124,140,90,.3); }
-.msb.j { background: rgba(184,169,201,.08); color: var(--lav-d); border-color: rgba(184,169,201,.25); }
-.msb.j.on { background: linear-gradient(135deg, var(--lav-l), var(--lav)); color: #fff; box-shadow: 0 2px 8px rgba(184,169,201,.3); }
+.msb.k { background: rgba(184,169,201,.08); color: var(--lav-d); border-color: rgba(184,169,201,.25); }
+.msb.k.on { background: linear-gradient(135deg, var(--lav-l), var(--lav)); color: #fff; box-shadow: 0 2px 8px rgba(184,169,201,.3); }
 
 /* ── Cost box ── */
 .cost-box {
@@ -1332,9 +1332,9 @@ body::before {
         <div class="menu-name">Menú Adulto</div>
         <div class="menu-price">$65.000</div>
       </div>
-      <div class="menu-card youth">
-        <div class="menu-lbl">Jóvenes</div>
-        <div class="menu-name">Menú Joven</div>
+      <div class="menu-card kids">
+        <div class="menu-lbl">Kids</div>
+        <div class="menu-name">Menú Kids</div>
         <div class="menu-price">$45.000</div>
       </div>
     </div>
@@ -1416,7 +1416,7 @@ body::before {
         </div>
         <div class="cost-box" id="cbox" style="margin-top:10px;">
           <div class="cost-row"><span id="albl">0 Menú Adulto</span><span id="aval">$0</span></div>
-          <div class="cost-row"><span id="jlbl">0 Menú Joven</span><span id="jval">$0</span></div>
+          <div class="cost-row"><span id="jlbl">0 Menú Kids</span><span id="jval">$0</span></div>
           <div class="cost-total"><span class="cost-total-lbl">Total</span><span class="cost-total-val" id="tval">$0</span></div>
         </div>
         <div class="alias-box" style="margin-top:11px;">
@@ -1511,7 +1511,7 @@ function renderMenu(){
       d.innerHTML='<span class="menu-sel-name">Persona '+x+'</span>'+
         '<div class="menu-sel-btns">'+
         '<button class="msb a'+(gm[x]==='adult'?' on':'')+'" onclick="sm('+x+',\'adult\')">Adulto</button>'+
-        '<button class="msb j'+(gm[x]==='youth'?' on':'')+'" onclick="sm('+x+',\'youth\')">Joven</button>'+
+        '<button class="msb k'+(gm[x]==='kids'?' on':'')+'" onclick="sm('+x+',\'youth\')">Kids</button>'+
         '</div>';
       l.appendChild(d);
     })(i);
@@ -1524,7 +1524,7 @@ function updCost(){
   var a=0,j=0;
   Object.values(gm).forEach(function(v){if(v==='adult')a++;else j++;});
   document.getElementById('albl').textContent=a+' Menú Adulto';
-  document.getElementById('jlbl').textContent=j+' Menú Joven';
+  document.getElementById('jlbl').textContent=j+' Menú Kids';
   document.getElementById('aval').textContent='$'+(a*65000).toLocaleString('es-AR');
   document.getElementById('jval').textContent='$'+(j*45000).toLocaleString('es-AR');
   document.getElementById('tval').textContent='$'+(a*65000+j*45000).toLocaleString('es-AR');
@@ -1540,7 +1540,7 @@ function doWA(e){
   } else {
     lines.push('Asistencia: Ceremonia + fiesta');
     lines.push('Cantidad de personas: '+gc);lines.push('');lines.push('Invitados:');
-    for(var i=1;i<=gc;i++)lines.push(i+'. Persona '+i+' — Menú '+(gm[i]==='adult'?'Adulto':'Joven'));
+    for(var i=1;i<=gc;i++)lines.push(i+'. Persona '+i+' — Menú '+(gm[i]==='adult'?'Adulto':'Kids'));
     var a=0,j=0;Object.values(gm).forEach(function(v){if(v==='adult')a++;else j++;});
     lines.push('');lines.push('Total: $'+(a*65000+j*45000).toLocaleString('es-AR'));
   }
