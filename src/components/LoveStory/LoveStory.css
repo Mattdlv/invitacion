@@ -1,0 +1,215 @@
+.love {
+  position: relative;
+  height: 94vw;
+  overflow: hidden;
+  padding-top: 8.9vw;
+  background:
+    url('/textures/paper-noise.svg'),
+    linear-gradient(90deg, transparent 50.9%, rgb(120 110 95 / 0.07) 51.1%, rgb(255 255 255 / 0.55) 51.25%, transparent 51.6%),
+    linear-gradient(180deg, transparent 59.8%, rgb(120 110 95 / 0.05) 60%, rgb(255 255 255 / 0.45) 60.1%, transparent 60.5%),
+    radial-gradient(ellipse at 30% 20%, #f3f2ed, transparent 60%),
+    var(--cream);
+  color: #1f1b17;
+}
+
+.love__heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.love__our {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-serif);
+  font-size: 3vw;
+  letter-spacing: 0.2em;
+  margin-right: -0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.love__script {
+  margin-top: 4.8vw;
+  margin-left: 1vw;
+  font-size: 7.7vw;
+  line-height: 1.05;
+  --cap: 2.1em;
+}
+
+.love__body {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.love__body > * {
+  pointer-events: auto;
+}
+
+.love__keepsake {
+  position: absolute;
+  top: 31.4vw;
+  left: 13.6vw;
+  width: 36vw;
+  margin: 0;
+}
+
+.love__frame {
+  position: relative;
+  z-index: 2;
+  width: 37.6vw;
+  margin-left: 0.1vw;
+  filter: drop-shadow(0 0.6vw 0.8vw rgb(60 45 20 / 0.28));
+  transition: transform 0.8s var(--ease-out);
+  max-width: none;
+}
+
+.love__frame:hover {
+  transform: rotate(-1.5deg) scale(1.015);
+}
+
+.love__note {
+  position: absolute;
+  z-index: 1;
+  top: 28.6vw;
+  left: 0;
+  width: 34.5vw;
+  height: 27vw;
+  padding: 16.5vw 0 0 2.6vw;
+  background:
+    url('/textures/paper-noise.svg'),
+    linear-gradient(175deg, #e9e1d5, #e1d8ca);
+  box-shadow: 0 0.3vw 0.9vw rgb(70 55 35 / 0.18);
+  clip-path: polygon(
+    0 0, 100% 0, 100% 92%, 97% 93.5%, 93% 92.2%, 89% 94.6%, 85% 93%, 80% 95.5%, 76% 93.8%, 71% 96%, 66% 94.2%,
+    61% 96.6%, 56% 94.8%, 51% 97.2%, 46% 95.4%, 41% 97.8%, 36% 95.8%, 31% 98.2%, 26% 96.2%, 21% 98.6%, 16% 96.6%,
+    11% 99%, 6% 97.2%, 2% 99.4%, 0 98%
+  );
+  color: #4c443a;
+  transform: rotate(4.5deg);
+}
+
+.love__note-name {
+  font-size: 2.5vw;
+  line-height: 1;
+  transform: rotate(-10deg);
+  transform-origin: left center;
+  --cap: 1.9em;
+  color: #5c544a;
+}
+
+.love__note-date {
+  margin: -0.8vw 0 0 21.5vw;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: max(6px, 0.5vw);
+  letter-spacing: 0.3em;
+  transform: rotate(-10deg);
+}
+
+.love__clip {
+  position: absolute;
+  z-index: 3;
+  top: 34vw;
+  left: 28.4vw;
+  width: 2vw;
+}
+
+.love__text {
+  position: absolute;
+  top: 38.7vw;
+  left: 53.5vw;
+  width: 32.9vw;
+  font-family: var(--font-type);
+  font-size: max(11px, 1.27vw);
+  line-height: 1.68;
+  text-align: justify;
+  hyphens: auto;
+  color: #2a2520;
+}
+
+.love__text p + p {
+  margin-top: 1.68em;
+}
+
+@media (max-width: 1023px) {
+  .love {
+    height: auto;
+    padding: 72px 20px 80px;
+  }
+
+  .love__our {
+    font-size: 20px;
+  }
+
+  .love__script {
+    margin-top: -18px;
+    font-size: clamp(84px, 27vw, 130px);
+  }
+
+  .love__body {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 28px;
+  }
+
+  .love__keepsake {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(320px, 86vw);
+    aspect-ratio: 320 / 505;
+  }
+
+  .love__frame {
+    width: 99%;
+    margin-left: 0.5%;
+  }
+
+  .love__note {
+    top: 55%;
+    width: 100%;
+    height: 45%;
+    padding: 32% 0 0 7%;
+  }
+
+  .love__note-name {
+    font-size: clamp(44px, 14vw, 60px);
+  }
+
+  .love__note-date {
+    margin: 0 0 0 58%;
+    font-size: 7px;
+  }
+
+  .love__clip {
+    top: 58.5%;
+    left: 77%;
+    width: 22px;
+  }
+
+  .love__text {
+    position: static;
+    width: 100%;
+    max-width: 480px;
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .love__text p + p {
+    margin-top: 1.4em;
+  }
+}
+
+@media (max-width: 1023px) {
+  .love__script { margin: 18px 0 0; font-size: clamp(30px, 8.7vw, 56px); }
+  .love__body { margin-top: 56px; }
+  .love__note { padding: 40% 0 0 7%; }
+  .love__note-name { font-size: clamp(17px, 5.8vw, 23px); }
+  .love__note-date { margin: -2px 0 0 60%; }
+}

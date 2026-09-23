@@ -1,0 +1,129 @@
+.rsvp {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 43.6vw;
+  padding: 0 14.6vw 0 13.4vw;
+  background: var(--cream);
+  color: var(--ink);
+  text-align: center;
+}
+
+.rsvp__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16vw;
+}
+
+.rsvp__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rsvp__script {
+  margin-left: 4vw;
+  font-size: 7vw;
+  line-height: 0.8;
+  --cap: 1.7em;
+  color: #3a332c;
+}
+
+.rsvp__title {
+  margin-top: -0.6vw;
+  font-size: 5.6vw;
+  letter-spacing: 0.02em;
+}
+
+.rsvp__deadline {
+  margin-top: 2.2vw;
+  font-weight: 700;
+  font-size: max(9px, 1vw);
+  letter-spacing: 0.42em;
+  margin-right: -0.42em;
+}
+
+.rsvp__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 11.9vw;
+}
+
+.rsvp__divider {
+  width: 22vw;
+}
+
+.rsvp__text {
+  margin-top: 2.8vw;
+  font-style: italic;
+  font-size: max(11px, 1.4vw);
+  line-height: 1.4;
+}
+
+.rsvp__text + .rsvp__text {
+  margin-top: 2.1vw;
+}
+
+.rsvp__button {
+  width: 25.2vw;
+  height: 4vw;
+  margin-top: 2.4vw;
+  background: var(--white);
+  font-size: max(11px, 1.4vw);
+  letter-spacing: 0.3em;
+}
+
+@media (max-width: 1023px) {
+  .rsvp {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    height: auto;
+    padding: 72px 24px 80px;
+  }
+
+  .rsvp__left,
+  .rsvp__right {
+    padding-top: 0;
+  }
+
+  .rsvp__script {
+    font-size: clamp(90px, 28vw, 130px);
+  }
+
+  .rsvp__title {
+    margin-top: -4px;
+    font-size: clamp(52px, 16vw, 76px);
+  }
+
+  .rsvp__deadline {
+    margin-top: 20px;
+    font-size: 11px;
+  }
+
+  .rsvp__divider {
+    width: 220px;
+  }
+
+  .rsvp__text {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .rsvp__text + .rsvp__text {
+    margin-top: 14px;
+  }
+
+  .rsvp__button {
+    width: min(100%, 300px);
+    height: 52px;
+    margin-top: 28px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .rsvp__left { padding-top: 48px; }
+  .rsvp__script { margin-left: 4vw; font-size: clamp(46px, 13vw, 72px); }
+  .rsvp__title { margin-top: -2px; font-size: clamp(38px, 12vw, 60px); }
+}

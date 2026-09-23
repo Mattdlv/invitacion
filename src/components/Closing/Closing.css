@@ -1,0 +1,96 @@
+.closing {
+  position: relative;
+  height: 43.3vw;
+  overflow: hidden;
+  background: #1b1a1a;
+  color: #f2f0ec;
+  text-align: center;
+}
+
+.closing__bg {
+  position: absolute;
+  inset: 0;
+  background: url('/images/celebrate-hands.webp') center / cover no-repeat;
+}
+
+.closing__heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12.2vw;
+}
+
+.closing__title {
+  font-size: 5.7vw;
+  letter-spacing: 0.02em;
+}
+
+.closing__script {
+  margin-top: 0.8vw;
+  margin-left: 0;
+  font-size: 5.2vw;
+  --cap: 1.75em;
+  color: #e8e5df;
+}
+
+.closing__meta {
+  position: absolute;
+  bottom: 3.2vw;
+  font-weight: 700;
+  font-size: max(9px, 0.74vw);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+.closing__meta--left {
+  left: 10.8vw;
+}
+
+.closing__meta--right {
+  right: 10.4vw;
+}
+
+@media (max-width: 1023px) {
+  .closing {
+    height: max(520px, 130vw);
+  }
+
+  .closing__heading {
+    padding: 0 16px;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .closing__title {
+    font-size: clamp(30px, 10vw, 48px);
+  }
+
+  .closing__script {
+    margin-top: -2px;
+    font-size: clamp(48px, 15vw, 72px);
+  }
+
+  .closing__meta {
+    bottom: 28px;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+  }
+
+  .closing__meta--left {
+    left: 20px;
+  }
+
+  .closing__meta--right {
+    right: 20px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .closing__title { font-size: clamp(26px, 8.4vw, 40px); }
+  .closing__script { margin-top: 20px; font-size: clamp(32px, 9.6vw, 50px); }
+}
+
+@media (max-width: 1023px) {
+  .closing { height: clamp(520px, 130vw, 760px); }
+}
