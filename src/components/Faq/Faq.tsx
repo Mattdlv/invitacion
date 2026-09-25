@@ -13,7 +13,15 @@ export default function Faq() {
         {faq.map((item, i) => (
           <div key={item.q} className="faq__item" data-reveal style={revealDelay((i % 2) * 0.12)}>
             <dt className="faq__q">{item.q}</dt>
-            <dd className="faq__a">{item.a}</dd>
+            <dd className="faq__a">
+              {item.a}
+              {item.link && (
+                <a className="faq__link" href={item.link.href} target="_blank" rel="noreferrer">
+                  {item.link.label}
+                  <span className="sr-only"> (se abre en una pestaña nueva)</span>
+                </a>
+              )}
+            </dd>
           </div>
         ))}
       </dl>

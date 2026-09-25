@@ -3,8 +3,9 @@ import Hero from './components/Hero/Hero';
 import Countdown from './components/Countdown/Countdown';
 import Timeline from './components/Timeline/Timeline';
 import Details from './components/Details/Details';
+import Menus from './components/Menus/Menus';
+import Playlist from './components/Playlist/Playlist';
 import Gifts from './components/Gifts/Gifts';
-import LoveStory from './components/LoveStory/LoveStory';
 import Faq from './components/Faq/Faq';
 import Rsvp from './components/Rsvp/Rsvp';
 import RsvpModal from './components/Rsvp/RsvpModal';
@@ -20,8 +21,9 @@ export default function App() {
         <Countdown />
         <Timeline />
         <Details />
+        <Menus />
+        <Playlist />
         <Gifts />
-        <LoveStory />
         <Faq />
         <Rsvp onOpen={() => setRsvpOpen(true)} />
       </main>

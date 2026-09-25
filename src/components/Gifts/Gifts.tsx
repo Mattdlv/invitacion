@@ -20,18 +20,6 @@ export default function Gifts() {
             ))}
           </p>
         ))}
-        <div className="gifts__contact" data-reveal style={revealDelay(0.3)}>
-          <p>
-            Escaneá el QR o escribinos a
-            <br />
-            <a href={`mailto:${gifts.email}`}>{gifts.email}</a>
-          </p>
-          <img
-            className="gifts__qr"
-            src="/images/honeymoon-qr.svg"
-            alt={`Código QR para escribir a ${gifts.email}`}
-          />
-        </div>
       </div>
     </section>
   );

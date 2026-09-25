@@ -127,3 +127,62 @@
   .rsvp__script { margin-left: 4vw; font-size: clamp(46px, 13vw, 72px); }
   .rsvp__title { margin-top: -2px; font-size: clamp(38px, 12vw, 60px); }
 }
+
+/* Estado cerrado: el plazo vencio, no hay accion disponible. */
+.rsvp--closed .rsvp__script,
+.rsvp--closed .rsvp__title {
+  color: #7d766c;
+}
+
+.rsvp--closed .rsvp__divider {
+  opacity: 0.45;
+}
+
+.rsvp--closed .rsvp__deadline {
+  color: #6d6659;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.rsvp__button--closed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7vw;
+  width: auto;
+  min-width: 25.2vw;
+  height: auto;
+  min-height: 4vw;
+  padding: 0.85vw 2vw;
+  font-size: max(10px, 0.95vw);
+  letter-spacing: 0.2em;
+  border: 1px solid rgb(62 50 38 / 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: #6d6659;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+.rsvp__lock {
+  width: 1.3vw;
+  min-width: 15px;
+}
+
+@media (max-width: 1023px) {
+  .rsvp__button--closed {
+    gap: 10px;
+    width: min(100%, 300px);
+    min-width: 0;
+    min-height: 52px;
+    padding: 12px 18px;
+    font-size: 11px;
+  }
+
+  .rsvp__lock {
+    width: 16px;
+  }
+}

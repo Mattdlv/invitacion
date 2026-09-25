@@ -1,6 +1,7 @@
 .faq {
-  height: 68.8vw;
-  padding-top: 7.4vw;
+  /* Altura segun contenido: con textos largos, una altura fija desbordaba
+     la ultima pregunta sobre la seccion siguiente. */
+  padding: 7.4vw 0 8.5vw;
   background: var(--brown);
   color: #eee6d8;
   text-align: center;
@@ -67,4 +68,29 @@
 
 @media (max-width: 1023px) {
   .faq__grid { grid-template-columns: minmax(0, 480px); }
+}
+
+.faq__link {
+  display: inline-block;
+  min-height: 44px;
+  margin-top: 0.6vw;
+  padding: 0.75vw 0.2vw;
+  border-bottom: 1px solid currentColor;
+  font-weight: 700;
+  font-size: max(10px, 0.82vw);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
+}
+
+.faq__link:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 1023px) {
+  .faq__link {
+    margin-top: 10px;
+    padding: 12px 2px;
+    font-size: 10px;
+  }
 }

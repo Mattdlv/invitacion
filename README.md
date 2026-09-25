@@ -19,7 +19,7 @@ npm run preview    # serve the production build
 
 ```
 public/
-  images/     photos (hero, honeymoon, love-story frame, closing) + QR code
+  images/     photos (hero, regalos, closing)
   svg/        ornaments: countdown frame, RSVP divider, paperclip
   textures/   damask pattern, paper noise
   icons/      favicon
@@ -32,7 +32,7 @@ src/
 
 ## Where to change things
 
-- **Content** (names, dates, texts, FAQ, timeline, hotel links, email): `src/data/content.ts`
+- **Content** (names, dates, texts, FAQ, timeline, venue): `src/data/content.ts`
 - **Countdown target date**: `countdownTarget` in `src/data/content.ts`
 - **Colors / fonts**: CSS variables at the top of `src/styles/global.css`
 - **Section styles**: `src/components/<Section>/<Section>.css`
