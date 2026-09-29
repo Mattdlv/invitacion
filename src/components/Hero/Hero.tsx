@@ -1,6 +1,7 @@
 import { couple } from '../../data/content';
 import { useParallax } from '../../hooks/useParallax';
 import Navigation from '../Navigation/Navigation';
+import RippleDistortion from '../RippleDistortion/RippleDistortion';
 import Script from '../Script/Script';
 import './Hero.css';
 
@@ -9,7 +10,26 @@ export default function Hero() {
 
   return (
     <header className="hero">
-      <div className="hero__bg" ref={bg} aria-hidden="true" />
+      {/* La foto sigue puesta como fondo CSS: si no hay WebGL, queda ella. */}
+      <div className="hero__bg" ref={bg} aria-hidden="true">
+        <RippleDistortion
+          src="/images/hero-couple.webp"
+          className="hero__ripple"
+          grayscale={false}
+          strength={0.12}
+          swirl={0.8}
+          rings={3}
+          brushSize={190}
+          spacing={18}
+          spread={4}
+          fade={2.4}
+          glint={0.12}
+          tint="#d6c69c"
+          tintAmount={0.09}
+          trigger="both"
+          quality="low"
+        />
+      </div>
       <Navigation />
       <div className="hero__content">
         <p className="hero__eyebrow display">La boda de</p>

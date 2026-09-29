@@ -118,7 +118,20 @@ export const playlist = {
 };
 
 export const gifts = {
+  eyebrow: 'Regalos',
   title: 'Regalos',
+  /** Datos bancarios de la tarjeta de transferencia. El botón copia las tres filas. */
+  transfer: {
+    name: 'Transferencia',
+    subtitle: 'Datos bancarios',
+    rows: [
+      { label: 'Alias', value: 'A COMPLETAR' },
+      { label: 'CBU', value: 'A COMPLETAR' },
+      { label: 'Titular', value: 'A COMPLETAR' },
+    ],
+    copyLabel: 'Copiar datos',
+    copiedLabel: 'Datos copiados',
+  },
   paragraphs: [
     [
       'Su presencia es el mejor regalo que podríamos pedir.',
@@ -132,8 +145,14 @@ export const gifts = {
   ],
 };
 
+export const faqHeading = {
+  eyebrow: 'Preguntas',
+  script: 'Frecuentes',
+  intro: 'Acá encontrás respuestas a las dudas más comunes sobre la ceremonia y la recepción.',
+};
+
 // Ordered row by row: left, right, left, right…
-export const faq: { q: string; a: string; link?: { label: string; href: string } }[] = [
+export const faq: { q: string; a: string }[] = [
   {
     q: '¿La ceremonia es al aire libre o bajo techo?',
     a: 'Las dos cosas. La ceremonia y la recepción son al aire libre, y el resto de la fiesta sigue adentro del salón, con ambiente climatizado. Diciembre en La Rioja viene caluroso, así que vengan frescos y cómodos.',
@@ -141,10 +160,6 @@ export const faq: { q: string; a: string; link?: { label: string; href: string }
   {
     q: '¿Habrá estacionamiento?',
     a: 'Sí. El establecimiento tiene estacionamiento propio y cuenta con seguridad. Si se llena, también se puede estacionar sobre la Av. Benavídez. Les pedimos llegar unos minutos antes para acomodarse con tiempo.',
-  },
-  {
-    q: '¿Puedo ir con acompañante?',
-    a: 'El salón tiene capacidad limitada, así que la invitación alcanza solo a las personas nombradas en ella. Es importante tenerlo en cuenta: la seguridad del establecimiento permite el ingreso únicamente a quienes figuran en la lista de invitados.',
   },
   {
     q: '¿A qué hora debo llegar?',
@@ -161,10 +176,6 @@ export const faq: { q: string; a: string; link?: { label: string; href: string }
   {
     q: '¿Cómo compartimos las fotos?',
     a: '¡Nos encantaría ver la celebración a través de sus ojos! Tenemos una carpeta compartida: suban ahí todas las fotos y los videos que quieran, antes, durante y después de la fiesta.',
-    link: {
-      label: 'Subir fotos y videos',
-      href: 'https://drive.google.com/drive/folders/1D6hpmwounZ11s494pc0z0vv7kdFAtj-G?usp=sharing',
-    },
   },
 ];
 

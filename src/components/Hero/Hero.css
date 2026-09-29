@@ -13,6 +13,13 @@
   will-change: transform;
 }
 
+/* El lienzo del efecto va encima de la foto, sin taparla si WebGL no arranca. */
+.hero__ripple {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
 .hero__bg::after {
   content: '';
   position: absolute;
