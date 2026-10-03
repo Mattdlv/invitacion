@@ -1,85 +1,49 @@
-.playlist {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 6.5vw 0 7vw;
-  background: var(--brown);
-  color: #eee6d8;
-  text-align: center;
-}
-
-.playlist__note {
-  width: 1.35vw;
-  min-width: 16px;
-  margin-right: 0.8vw;
+.playlist__inner {
+  display: grid;
+  gap: clamp(48px, 7vw, 72px);
 }
 
 .playlist__title {
-  margin-top: 0;
-  font-size: 6vw;
-  color: #d9ceb9;
-  --cap: 1.75em;
+  margin-top: 24px;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.25rem, 1.5rem + 3.2vw, 4.25rem);
+  line-height: 1.02;
+}
+
+.playlist__title em {
+  font-style: italic;
 }
 
 .playlist__text {
-  margin-top: 2vw;
-  font-style: italic;
-  font-size: max(11px, 1.3vw);
-  line-height: 1.7;
+  max-width: 38ch;
+  margin: 28px 0 32px;
 }
 
-.playlist__text + .playlist__text {
-  margin-top: 1.4vw;
+.playlist__player {
+  border-radius: 14px;
+  background: var(--night-2);
+  overflow: hidden;
+  box-shadow: 0 24px 48px -28px rgb(29 25 21 / 0.45);
 }
 
-.playlist__line {
+.playlist__player iframe {
   display: block;
+  width: 100%;
+  height: 452px;
+  border: 0;
 }
 
-.playlist__button {
-  min-width: 22vw;
-  min-height: 4vw;
-  margin-top: 3vw;
-  padding: 0 2.4vw;
-  background: var(--paper);
-  font-size: max(10px, 0.95vw);
-  letter-spacing: 0.24em;
+@media (max-width: 599px) {
+  .playlist__player iframe {
+    height: 380px;
+  }
 }
 
-@media (max-width: 1023px) {
-  .playlist {
-    padding: 64px 20px 68px;
-  }
-
-  .playlist__note {
-    width: 17px;
-    margin-right: 10px;
-  }
-
-  .playlist__title {
-    margin-top: 0;
-    font-size: clamp(38px, 11vw, 60px);
-  }
-
-  .playlist__text {
-    margin-top: 18px;
-    font-size: 14px;
-  }
-
-  .playlist__text + .playlist__text {
-    margin-top: 12px;
-  }
-
-  .playlist__line {
-    display: inline;
-  }
-
-  .playlist__button {
-    width: min(100%, 300px);
-    min-width: 0;
-    min-height: 52px;
-    margin-top: 26px;
-    padding: 0 20px;
-    font-size: 11px;
+@media (min-width: 1024px) {
+  .playlist__inner {
+    grid-template-columns: 1fr 1.1fr;
+    column-gap: clamp(64px, 8vw, 140px);
+    align-items: center;
   }
 }

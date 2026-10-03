@@ -1,41 +1,50 @@
 import { playlist } from '../../data/content';
 import { revealDelay, useReveal } from '../../hooks/useReveal';
-import Script from '../Script/Script';
+import Icon from '../ui/Icon';
+import MaskText from '../ui/MaskText';
 import './Playlist.css';
 
 export default function Playlist() {
   const ref = useReveal<HTMLElement>();
 
   return (
-    <section className="playlist" id="playlist" ref={ref}>
-      <Script as="h2" className="playlist__title" text={playlist.title} data-reveal />
-      {playlist.paragraphs.map((lines, i) => (
-        <p key={i} className="playlist__text" data-reveal style={revealDelay(0.1 + i * 0.1)}>
-          {lines.map((line) => (
-            <span key={line} className="playlist__line">
-              {line}{' '}
-            </span>
-          ))}
-        </p>
-      ))}
-      <a
-        className="pill playlist__button"
-        href={playlist.url}
-        target="_blank"
-        rel="noreferrer"
-        data-reveal
-        style={revealDelay(0.3)}
-      >
-        <span className="playlist__note" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
-            <path d="M9 18V5.5l11-2V16" />
-            <ellipse cx="6.4" cy="18" rx="2.6" ry="2.2" />
-            <ellipse cx="17.4" cy="16" rx="2.6" ry="2.2" />
-          </svg>
-        </span>
-        {playlist.label}
-        <span className="sr-only"> en Spotify (se abre en una pestaña nueva)</span>
-      </a>
+    <section className="section section--ivory playlist" id="playlist" ref={ref} aria-labelledby="playlist-title">
+      <div className="container playlist__inner">
+        <div className="playlist__intro">
+          <p className="eyebrow" data-reveal="fade">
+            <span className="eyebrow__index">05</span>
+            <span className="eyebrow__rule" aria-hidden="true" />
+            La playlist
+          </p>
+          <MaskText
+            id="playlist-title"
+            className="playlist__title"
+            lines={[playlist.title[0], <em key="p">{playlist.title[1]}</em>]}
+            delay={0.1}
+          />
+          <p className="body playlist__text" data-reveal style={revealDelay(0.15)}>
+            {playlist.text}
+          </p>
+          <div data-reveal style={revealDelay(0.25)}>
+            <a className="btn btn--solid" href={playlist.url} target="_blank" rel="noreferrer">
+              <Icon name="music" className="btn__icon" />
+              {playlist.label}
+              <span className="sr-only"> en Spotify (se abre en una pestaña nueva)</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Reproductor de Spotify: muestra la lista en vivo, con los temas que se van sumando.
+            El fondo del marco cubre el hueco mientras carga, para que no salte el diseño. */}
+        <div className="playlist__player" data-reveal style={revealDelay(0.2)}>
+          <iframe
+            title="Playlist de la boda en Spotify"
+            src={playlist.embedUrl}
+            loading="lazy"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          />
+        </div>
+      </div>
     </section>
   );
 }

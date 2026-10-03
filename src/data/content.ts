@@ -1,55 +1,54 @@
-// All editable site copy lives here.
+// Todo el texto editable del sitio vive acá.
+// Lo marcado con "PENDIENTE" falta completar.
 
 export const couple = {
   first: 'Florencia',
   second: 'Matias',
+  monogram: 'F & M',
+  weekday: 'Viernes',
   displayDate: '4 de diciembre de 2026',
   shortDate: '04 · 12 · 2026',
   location: 'La Rioja, Argentina',
+  tagline: 'De todos los caminos posibles, elegimos el mismo.',
 };
 
-// Countdown target (local time). The reference shows a live countdown; set the real ceremony time here.
-export const countdownTarget = '2026-12-04T19:30:00';
+/** Fecha y hora de la ceremonia, con la zona horaria de Argentina para que el contador
+ *  sea correcto aunque el invitado abra la invitación desde otro país. */
+export const ceremonyStart = '2026-12-04T19:30:00-03:00';
+export const celebrationEnd = '2026-12-05T03:00:00-03:00';
 
 export const navLinks = [
-  { label: 'Itinerario', href: '#timeline' },
-  { label: 'Detalles', href: '#details' },
-  { label: 'Menú', href: '#menu' },
-  { label: 'F & M', href: '#', isLogo: true },
-  { label: 'Música', href: '#playlist' },
-  { label: 'Regalos', href: '#registry' },
-  { label: 'Confirmar', href: '#rsvp' },
-  { label: 'Preguntas', href: '#faq' },
+  { label: 'Celebración', href: '#celebracion' },
+  { label: 'Dress code', href: '#dress-code' },
+  { label: 'Fotos', href: '#fotos' },
+  { label: 'Regalos', href: '#regalos' },
+  { label: 'Preguntas', href: '#preguntas' },
 ];
 
-export const timeline: { time?: string; event: string }[] = [
-  { time: '19:30 h', event: 'Ceremonia' },
-  { event: 'Recepción' },
-  { event: 'Cena' },
+/* ---------- Ceremonia y celebración ---------- */
+
+export const venue = {
+  name: 'Minigolf La Rioja Eventos',
+  city: 'La Rioja, Argentina',
+  // PENDIENTE: calle y número. Si queda vacío, la fila no se muestra.
+  address: '',
+  mapUrl: 'https://bit.ly/boda-flor-mati',
+  mapLabel: 'Abrir en Google Maps',
+  note: 'La ceremonia y la recepción son al aire libre; después la fiesta sigue adentro del salón, climatizado. Te esperamos 15 minutos antes de las 19:30 para arrancar puntuales.',
+};
+
+export const schedule: { time?: string; event: string; detail?: string }[] = [
+  { time: '19:30', event: 'Ceremonia', detail: 'Al aire libre' },
+  { event: 'Recepción', detail: 'Al aire libre' },
+  { event: 'Cena', detail: 'En el salón' },
   { event: 'Baile' },
-  { time: '03:00 h', event: 'Mesa dulce' },
-];
-
-export const details: {
-  title: string;
-  body: string;
-  venue?: { name: string; city: string; mapUrl: string; mapLabel: string };
-}[] = [
-  {
-    title: 'Cómo llegar',
-    body: 'Nos casamos en el minigolf de la ciudad de La Rioja. Abrí el mapa y te guía hasta la puerta desde donde estés. Te esperamos unos minutos antes de las 19:30 para arrancar la ceremonia puntuales.',
-    venue: {
-      name: 'Minigolf La Rioja Eventos',
-      city: 'La Rioja, Argentina',
-      mapUrl: 'https://bit.ly/boda-flor-mati',
-      mapLabel: 'Ver ubicación',
-    },
-  },
+  { time: '03:00', event: 'Mesa dulce' },
 ];
 
 export const dressCode = {
-  style: 'Elegante sport',
+  style: ['Elegante', 'sport'],
   forbiddenTitle: 'Colores reservados',
+  forbiddenNote: 'Les pedimos no usarlos: quedan para el cortejo.',
   forbidden: [
     { name: 'Verde olivo', color: '#6b6a3a' },
     { name: 'Lavanda', color: '#b3a6cb' },
@@ -57,22 +56,22 @@ export const dressCode = {
     { name: 'Blanco', color: '#ffffff' },
   ],
   paragraphs: [
-    'El código es elegante sport: algo prolijo pero cómodo, pensado para una noche larga — la fiesta sigue hasta las tres. Nada de etiqueta rigurosa.',
-    'Les pedimos evitar cuatro colores, que quedan reservados: verde olivo, lavanda, beige y blanco. Fuera de esos, vení con el que más te guste.',
+    'Algo prolijo pero cómodo, pensado para una noche larga: la fiesta sigue hasta las tres. Nada de etiqueta rigurosa.',
+    'Diciembre en La Rioja viene caluroso: elegí telas livianas, sin perder la elegancia que pide el dress code.',
   ],
 };
 
 export const menus: {
-  title: string;
   intro: string;
-  options: { name: string; price: string; groups: { title?: string; items: string[] }[] }[];
+  /** `price` en pesos, sin puntos: la calculadora de la confirmación suma con estos valores. */
+  options: { key: 'adult' | 'child'; name: string; price: number; groups: { title?: string; items: string[] }[] }[];
 } = {
-  title: 'Menú',
-  intro: 'Al confirmar, contanos qué menú elegís y si tenés alguna restricción alimentaria.',
+  intro: 'Al confirmar, elegí cuántos menús de adulto y de niños necesitás: el formulario te calcula el total.',
   options: [
     {
+      key: 'adult',
       name: 'Adulto',
-      price: '$ 65.000',
+      price: 65000,
       groups: [
         {
           items: [
@@ -94,12 +93,11 @@ export const menus: {
       ],
     },
     {
+      key: 'child',
       name: 'Niños',
-      price: '$ 45.000',
+      price: 45000,
       groups: [
-        {
-          items: ['Empanadas de jamón y queso', 'Lomito o milanesa con papas fritas'],
-        },
+        { items: ['Empanadas de jamón y queso', 'Lomito o milanesa con papas fritas'] },
         { title: 'Postre', items: ['Postre helado'] },
         { title: 'Bebidas', items: ['Línea Coca-Cola y agua mineral'] },
       ],
@@ -107,55 +105,48 @@ export const menus: {
   ],
 };
 
+/* ---------- Fotos ---------- */
+
+export const instagram = {
+  handle: 'mf.noscasamos',
+  url: 'https://www.instagram.com/mf.noscasamos/',
+  title: ['Compartí', 'tus fotos'],
+  text: 'Queremos ver la boda a través de tus ojos. Subí tus fotos y videos de la noche y etiquetanos: así armamos entre todos el álbum.',
+  steps: ['Seguí la cuenta', 'Subí tu foto o tu historia', 'Etiquetá a @mf.noscasamos'],
+  label: 'Abrir en Instagram',
+};
+
+/* ---------- Playlist ---------- */
+
 export const playlist = {
-  title: 'La Playlist',
-  paragraphs: [
-    ['¿Qué canción no puede faltar?', 'Sumala a la lista y la escuchamos esa noche.'],
-    ['Cuantos más temas tenga,', 'mejor va a estar la pista.'],
-  ],
+  title: ['¿Qué canción', 'no puede faltar?'],
+  text: 'Sumala a la lista y la escuchamos esa noche. Cuantos más temas tenga, mejor va a estar la pista.',
   url: 'https://open.spotify.com/playlist/5gQbQTXRewEyyVpdkwqyJ2?nd=1&dlsi=3c5179495db14c79',
+  /** Reproductor embebido: muestra los temas de la lista, incluidos los que se van sumando. */
+  embedUrl: 'https://open.spotify.com/embed/playlist/5gQbQTXRewEyyVpdkwqyJ2?utm_source=generator&theme=0',
   label: 'Agregar mi canción',
 };
 
+/* ---------- Regalos ---------- */
+
 export const gifts = {
-  eyebrow: 'Regalos',
-  title: 'Regalos',
-  /** Datos bancarios de la tarjeta de transferencia. El botón copia las tres filas. */
-  transfer: {
-    name: 'Transferencia',
-    subtitle: 'Datos bancarios',
-    rows: [
-      { label: 'Alias', value: 'A COMPLETAR' },
-      { label: 'CBU', value: 'A COMPLETAR' },
-      { label: 'Titular', value: 'A COMPLETAR' },
-    ],
-    copyLabel: 'Copiar datos',
-    copiedLabel: 'Datos copiados',
-  },
+  title: ['Su presencia', 'es el regalo'],
   paragraphs: [
-    [
-      'Su presencia es el mejor regalo que podríamos pedir.',
-      'Si además desean hacernos un obsequio, escríbannos',
-      'y con gusto les pasamos los datos.',
-    ],
-    [
-      'Lo importante es tenerlos ahí, celebrando con nosotros',
-      'hasta el último baile.',
-    ],
+    'Lo importante es tenerlos ahí, celebrando con nosotros hasta el último baile.',
+    'Si además desean hacernos un obsequio, pueden hacerlo por transferencia.',
   ],
+  alias: 'mf.tarjeta',
+  holder: 'Maria Florencia Ponce',
+  copyLabel: 'Copiar alias',
+  copiedLabel: 'Alias copiado',
 };
 
-export const faqHeading = {
-  eyebrow: 'Preguntas',
-  script: 'Frecuentes',
-  intro: 'Acá encontrás respuestas a las dudas más comunes sobre la ceremonia y la recepción.',
-};
+/* ---------- Preguntas ---------- */
 
-// Ordered row by row: left, right, left, right…
 export const faq: { q: string; a: string }[] = [
   {
     q: '¿La ceremonia es al aire libre o bajo techo?',
-    a: 'Las dos cosas. La ceremonia y la recepción son al aire libre, y el resto de la fiesta sigue adentro del salón, con ambiente climatizado. Diciembre en La Rioja viene caluroso, así que vengan frescos y cómodos.',
+    a: 'Las dos cosas. La ceremonia y la recepción son al aire libre, y el resto de la fiesta sigue adentro del salón, con ambiente climatizado. Diciembre en La Rioja viene caluroso: elijan telas livianas, siempre dentro del dress code elegante sport.',
   },
   {
     q: '¿Habrá estacionamiento?',
@@ -163,34 +154,33 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: '¿A qué hora debo llegar?',
-    a: 'Les pedimos llegar entre 15 y 30 minutos antes de las 19:30, así la ceremonia arranca puntual. Es importante respetar el horario: de eso dependen la organización del evento y el tiempo de los demás invitados.',
-  },
-  {
-    q: '¿Pueden ir niños?',
-    a: '¡Sí! Los más chicos son bienvenidos y van a tener un espacio propio para divertirse. Eso sí, avísennos al confirmar si vienen con ellos y cuántos son, para reservarles el lugar.',
+    a: 'Les pedimos llegar 15 minutos antes de las 19:30, así la ceremonia arranca puntual. Es importante respetar el horario: de eso dependen la organización del evento y el tiempo de los demás invitados.',
   },
   {
     q: '¿Hay lista de regalos?',
-    a: 'Su presencia es el mejor regalo. Si de todas formas desean hacernos un obsequio, sí tenemos una lista: escríbannos por mensaje privado y con gusto se la compartimos.',
+    a: 'Su presencia es el mejor regalo. Si de todas formas desean hacernos un obsequio, pueden escribirnos por privado y con gusto les compartimos la lista de regalos.',
   },
   {
     q: '¿Cómo compartimos las fotos?',
-    a: '¡Nos encantaría ver la celebración a través de sus ojos! Tenemos una carpeta compartida: suban ahí todas las fotos y los videos que quieran, antes, durante y después de la fiesta.',
+    a: '¡Nos encantaría ver la celebración a través de sus ojos! Suban sus fotos y videos a Instagram etiquetando a @mf.noscasamos, antes, durante y después de la fiesta.',
   },
 ];
 
+/* ---------- Confirmación ---------- */
+
 export const rsvp = {
-  /** Ultimo momento para confirmar. Pasada esta fecha la seccion se cierra sola. */
-  deadlineDate: '2026-08-31T23:59:59',
-  deadline: 'ANTES DEL 31 | 08 | 2026',
-  lines: [
-    ['¡No vemos la hora de celebrar', 'este día tan especial con ustedes!'],
-    ['Por favor, completen el formulario.', 'Esperamos verlos allí.'],
-  ],
-  closedDeadline: 'CERRÓ EL 31 | 08 | 2026',
-  closedLines: [
-    ['El plazo para confirmar', 'ya finalizó.'],
-    ['Si te queda algo por avisarnos,', 'hablá directamente con los novios.'],
-  ],
-  closedLabel: 'Confirmación cerrada',
+  /** Último momento para confirmar. Pasada esta fecha el formulario se cierra solo. */
+  deadlineDate: '2026-08-31T23:59:59-03:00',
+  deadlineLabel: '31 de agosto de 2026',
+  title: ['¿Nos', 'acompañás?'],
+  intro: 'Completá el formulario una vez por grupo familiar. Si algo cambia, escribinos.',
+  /** Topes de los contadores del formulario. */
+  maxAdults: 8,
+  maxChildren: 6,
+  closedText: 'El plazo para confirmar ya finalizó. Para abonar la tarjeta, calculá acá el total de tu familia y transferí al alias. Si te queda algo por avisarnos, hablá directamente con los novios.',
+};
+
+export const closing = {
+  lines: ['Gracias por ser parte', 'de nuestra historia'],
+  signature: 'Con amor,',
 };

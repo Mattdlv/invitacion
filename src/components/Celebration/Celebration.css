@@ -1,0 +1,231 @@
+.celebration__grid {
+  display: grid;
+  gap: 48px;
+  margin-top: clamp(56px, 8vw, 112px);
+}
+
+.celebration__date {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: 0.8;
+}
+
+.celebration__day {
+  font-size: clamp(8rem, 4rem + 18vw, 17rem);
+  letter-spacing: -0.04em;
+  font-variant-numeric: lining-nums;
+}
+
+.celebration__month {
+  display: grid;
+  gap: 10px;
+  padding-bottom: 0.4em;
+  font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem);
+  line-height: 1;
+}
+
+.celebration__month em {
+  font-style: italic;
+  color: var(--olive);
+}
+
+.celebration__month span {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+}
+
+.facts {
+  border-top: 1px solid var(--line);
+}
+
+.facts__row {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.facts__row dd {
+  font-size: 1.3125rem;
+  line-height: 1.35;
+}
+
+.celebration__note {
+  max-width: 46ch;
+  margin-top: 28px;
+}
+
+.celebration__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* ---------- Programa ---------- */
+
+.program {
+  margin-top: clamp(96px, 12vw, 168px);
+}
+
+.program__title {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  font-weight: 300;
+}
+
+.program__track {
+  position: relative;
+  margin-top: 40px;
+}
+
+.program__list {
+  position: relative;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.program__line {
+  position: absolute;
+  background: var(--line-strong);
+}
+
+.program__item {
+  position: relative;
+  display: grid;
+  align-content: start;
+}
+
+.program__dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ivory);
+}
+
+.program__time {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.program__event {
+  font-family: var(--font-serif);
+  font-size: clamp(1.625rem, 1.35rem + 1vw, 2.25rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+
+.program__detail {
+  font-style: italic;
+  font-size: 1.0625rem;
+  color: var(--muted);
+}
+
+/* Móvil: línea vertical a la izquierda */
+@media (max-width: 899px) {
+  .program__line {
+    top: 8px;
+    bottom: 8px;
+    left: 4px;
+    width: 1px;
+    transform-origin: top;
+  }
+
+  .program__line[data-reveal='rule'] {
+    transform: scaleY(0);
+  }
+
+  .program__line[data-reveal='rule'][data-visible] {
+    transform: none;
+  }
+
+  .program__item {
+    gap: 4px;
+    padding: 0 0 32px 36px;
+  }
+
+  .program__item:last-child {
+    padding-bottom: 0;
+  }
+
+  .program__dot {
+    top: 4px;
+    left: 0;
+  }
+}
+
+/* Escritorio: línea horizontal con las etapas repartidas */
+@media (min-width: 900px) {
+  .program__list {
+    grid-template-columns: repeat(var(--steps, 5), minmax(0, 1fr));
+    padding-top: 40px;
+  }
+
+  .program__line {
+    top: 4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+  }
+
+  .program__item {
+    gap: 8px;
+    padding-right: 24px;
+  }
+
+  .program__dot {
+    top: -40px;
+    left: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .celebration__grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(48px, 8vw, 140px);
+    align-items: start;
+  }
+
+  .celebration__date {
+    position: sticky;
+    top: calc(var(--header-h) + 48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .program__line[data-reveal='rule'] {
+    transform: none;
+  }
+}
+
+/* Etapas sin hora: el punto se alinea con el nombre */
+@media (max-width: 899px) {
+  .program__item--untimed .program__dot {
+    top: 0.85em;
+  }
+}
+
+@media (min-width: 900px) {
+  .program__item--untimed {
+    padding-top: 26px;
+  }
+}

@@ -1,78 +1,78 @@
 .countdown {
-  height: 34.6vw;
-  padding: 0.5vw 9.2vw 1vw;
-  background: var(--brown);
-  color: var(--gold);
+  overflow: hidden;
+}
+
+/* Un halo cálido muy tenue, como el horizonte de la foto de portada */
+.countdown::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -45%;
+  width: min(1100px, 140vw);
+  aspect-ratio: 2 / 1;
+  translate: -50% 0;
+  background: radial-gradient(closest-side, rgb(217 180 140 / 0.14), transparent);
+  pointer-events: none;
 }
 
 .countdown__inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  padding-top: 5.4vw;
+  text-align: center;
 }
 
 .countdown__title {
-  font-size: 4.2vw;
-  color: #d8c6a0;
-  --cap: 1.6em;
+  margin-top: 28px;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 1.6rem + 4vw, 5rem);
+  line-height: 1;
 }
 
-/* Divisor con la ramita, entre el título y los números */
-
-.countdown__divider {
-  display: flex;
-  align-items: center;
-  gap: 1.1vw;
-  margin-top: 2.2vw;
-  color: #b9a67c;
+.countdown__title em {
+  font-style: italic;
+  color: var(--ember);
 }
-
-.countdown__divider svg {
-  width: 2.3vw;
-  min-width: 26px;
-}
-
-.countdown__rule {
-  width: 8vw;
-  max-width: 130px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.65;
-}
-
-/* Números */
 
 .countdown__units {
-  display: flex;
-  align-items: flex-start;
-  margin-top: 2.6vw;
-  font-family: var(--font-serif);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  max-width: 1040px;
+  margin-top: clamp(48px, 7vw, 88px);
+  border-block: 1px solid var(--night-line);
 }
 
 .countdown__unit {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 14px;
+  padding: clamp(24px, 4vw, 44px) 4px;
+}
+
+.countdown__unit + .countdown__unit {
+  border-left: 1px solid var(--night-line);
 }
 
 .countdown__value {
   display: flex;
-  font-size: 7.9vw;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(3rem, 1.4rem + 7.5vw, 8.5rem);
   line-height: 1;
-  font-variant-numeric: tabular-nums;
-  color: #e8dcc0;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* Cada dígito es una ventana: el saliente sale por arriba, el entrante llega de abajo. */
 .countdown__digit {
   position: relative;
   display: inline-block;
-  width: 0.62em;
-  height: 1em;
+  width: 0.56em;
+  height: 1.05em;
   overflow: hidden;
-  text-align: center;
 }
 
 .countdown__roll {
@@ -84,129 +84,71 @@
 }
 
 .countdown__roll--in {
-  animation: countdown-in 0.55s var(--ease-out) both;
+  animation: countdown-in 480ms var(--ease-out) both;
 }
 
 .countdown__roll--out {
-  animation: countdown-out 0.55s var(--ease-out) both;
+  animation: countdown-out 480ms var(--ease-out) both;
 }
 
 @keyframes countdown-in {
   from {
-    transform: translateY(105%);
+    transform: translateY(100%);
     opacity: 0;
-    filter: blur(2px);
+    filter: blur(3px);
   }
 }
 
 @keyframes countdown-out {
   to {
-    transform: translateY(-105%);
+    transform: translateY(-100%);
     opacity: 0;
-    filter: blur(2px);
+    filter: blur(3px);
   }
 }
 
 .countdown__label {
-  margin-top: 1.3vw;
-  font-size: max(10px, 1.18vw);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  margin-right: -0.22em;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  margin-right: -0.16em;
-  white-space: nowrap;
-  color: #cbb994;
+  color: var(--on-night-muted);
 }
 
-/* Separador: hairline vertical con una estrella de cuatro puntas */
-
-.countdown__star {
+.countdown__foot {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5vw;
-  margin: 0 1.9vw;
-  padding-top: 0.6vw;
-  color: #b9a67c;
+  gap: 24px;
+  margin-top: clamp(40px, 6vw, 64px);
 }
 
-.countdown__star svg {
-  width: 0.85vw;
-  min-width: 10px;
+.countdown__date {
+  font-style: italic;
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  color: var(--on-night);
 }
 
-.countdown__star-line {
-  width: 1px;
-  height: 2.2vw;
-  background: currentColor;
-  opacity: 0.55;
+@media (max-width: 479px) {
+  .countdown__unit {
+    gap: 10px;
+  }
+
+  .countdown__label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    margin-right: -0.12em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .countdown__roll--in,
-  .countdown__roll--out {
+  .countdown__roll--in {
     animation: none;
   }
 
   .countdown__roll--out {
     display: none;
-  }
-}
-
-@media (max-width: 1023px) {
-  .countdown {
-    height: auto;
-    padding: 16px;
-  }
-
-  .countdown__inner {
-    padding: 56px 14px 60px;
-  }
-
-  .countdown__title {
-    font-size: clamp(24px, 7vw, 36px);
-    text-align: center;
-  }
-
-  .countdown__divider {
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .countdown__divider svg {
-    width: 26px;
-  }
-
-  .countdown__rule {
-    width: 52px;
-  }
-
-  .countdown__units {
-    margin-top: 22px;
-  }
-
-  .countdown__value {
-    font-size: clamp(34px, 10.5vw, 58px);
-  }
-
-  .countdown__label {
-    margin-top: 10px;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    margin-right: -0.12em;
-  }
-
-  .countdown__star {
-    gap: 5px;
-    margin: 0 clamp(6px, 2.4vw, 16px);
-    padding-top: 4px;
-  }
-
-  .countdown__star svg {
-    width: 9px;
-    min-width: 0;
-  }
-
-  .countdown__star-line {
-    height: 14px;
   }
 }

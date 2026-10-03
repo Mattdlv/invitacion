@@ -1,329 +1,62 @@
-.gifts {
-  position: relative;
-  /* Altura según contenido: con la tarjeta adentro, una altura fija desbordaría. */
-  padding: 6.4vw 0 7vw;
-  overflow: hidden;
-  background: #45382b;
-  color: #ece4d6;
-  text-align: center;
-}
-
-.gifts__bg {
-  position: absolute;
-  inset: 0;
-  background: url('/images/honeymoon-building.webp') center / cover no-repeat;
-}
-
-/* Vela la foto: el texto va claro y la imagen tiene zonas medias. */
-.gifts__bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgb(30 23 16 / 0.72),
-    rgb(30 23 16 / 0.58) 45%,
-    rgb(30 23 16 / 0.78)
-  );
-}
-
-/* Ramas de las esquinas: acompañan, no compiten. */
-.gifts__sprig {
-  position: absolute;
-  bottom: 0;
-  width: 15vw;
-  min-width: 130px;
-  color: #d9c9a8;
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-.gifts__sprig--left {
-  left: 1.5vw;
-}
-
-.gifts__sprig--right {
-  right: 1.5vw;
-  transform: scaleX(-1);
-}
-
-.gifts__content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Encabezado */
-
-.gifts__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 1.2vw;
-  font-size: max(10px, 0.95vw);
-  letter-spacing: 0.42em;
-  margin-right: -0.42em;
-  color: #d8c9a6;
-}
-
-.gifts__tick {
-  width: 6vw;
-  max-width: 92px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.6;
-}
-
-.gifts__title {
-  margin-top: 8.2vw;
-  font-size: 6vw;
-  color: #e3d8c5;
-  --cap: 1.8em;
+.gifts__grid {
+  display: grid;
+  gap: clamp(56px, 8vw, 96px);
 }
 
 .gifts__text {
-  margin-top: 2.4vw;
-  font-size: max(11px, 1.3vw);
-  line-height: 1.78;
-}
-
-.gifts__text + .gifts__text {
-  margin-top: 1.6vw;
-}
-
-.gifts__line {
-  display: block;
-}
-
-/* Tarjetas */
-
-.gifts__cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 23vw));
-  justify-content: center;
-  gap: 1.8vw;
-  margin-top: 3.4vw;
+  gap: 14px;
+  max-width: 40ch;
+  margin-top: clamp(28px, 4vw, 44px);
 }
 
-.gifts__card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2.4vw 2vw 2.2vw;
-  border: 1px solid rgb(217 201 168 / 0.45);
-  border-radius: 0.9vw;
-  background: rgb(30 23 16 / 0.34);
-  backdrop-filter: blur(1px);
+/* Libro de datos: filetes y tipografía, como un recibo de papelería fina */
+.ledger {
+  align-self: end;
+  min-width: 0;
+  padding: clamp(22px, 4vw, 44px);
+  background: var(--ivory);
+  border: 1px solid var(--line);
 }
 
-.gifts__icon {
-  width: 2.6vw;
-  min-width: 30px;
-  color: #e6d3ab;
+.ledger__rows {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
 }
 
-.gifts__card-name {
-  margin-top: 1.2vw;
-  font-family: var(--font-display);
-  font-size: max(17px, 2vw);
-  font-style: italic;
-  letter-spacing: 0.02em;
-  color: #f1e9db;
-}
-
-.gifts__card-sub {
-  margin-top: 0.4vw;
-  font-size: max(11px, 1.05vw);
-  color: #ded2bd;
-}
-
-.gifts__card-rule {
-  width: 3.4vw;
-  min-width: 42px;
-  height: 0;
-  margin: 1.4vw 0;
-  border: 0;
-  border-top: 1px solid rgb(217 201 168 / 0.5);
-}
-
-.gifts__rows {
-  margin: 0;
-  width: 100%;
-}
-
-.gifts__row {
-  display: flex;
+.ledger__row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
   align-items: baseline;
-  justify-content: center;
-  gap: 0.6em;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
 }
 
-.gifts__row + .gifts__row {
-  margin-top: 0.45vw;
-}
-
-.gifts__row dt {
-  font-weight: 700;
-  font-size: max(9px, 0.74vw);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #cbbb99;
-}
-
-.gifts__row dd {
-  margin: 0;
-  font-size: max(11px, 1vw);
-  letter-spacing: 0.04em;
-  color: #f1e9db;
+/* Dato para copiar: sans de caja alta, sin ambigüedades entre letras y números */
+.ledger__value {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
   overflow-wrap: anywhere;
 }
 
-.gifts__copy {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7vw;
-  min-height: 3.2vw;
-  margin-top: 1.7vw;
-  padding: 0.6vw 1.8vw;
-  border: 1px solid rgb(217 201 168 / 0.6);
-  border-radius: 999px;
-  background: transparent;
-  color: #f1e9db;
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: max(10px, 0.82vw);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease;
+/* El alias es el dato que se usa: grande y seleccionable de un toque si el portapapeles falla */
+.ledger__value--alias {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  user-select: all;
 }
 
-.gifts__copy:hover,
-.gifts__copy:focus-visible {
-  border-color: rgb(217 201 168 / 0.95);
-  background: rgb(217 201 168 / 0.14);
+.ledger__copy {
+  margin-top: 28px;
 }
 
-.gifts__copy-icon {
-  display: flex;
-  width: 1.05vw;
-  min-width: 13px;
-}
-
-/* Aviso para lectores de pantalla; el botón ya cambia de texto a la vista. */
-.gifts__status {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-@media (max-width: 1023px) {
-  .gifts {
-    padding: 64px 20px 72px;
-  }
-
-  .gifts__sprig {
-    width: 110px;
-    min-width: 0;
-    opacity: 0.22;
-  }
-
-  .gifts__sprig--left {
-    left: -10px;
-  }
-
-  .gifts__sprig--right {
-    right: -10px;
-  }
-
-  .gifts__eyebrow {
-    gap: 10px;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
-  }
-
-  .gifts__tick {
-    width: 36px;
-  }
-
-  .gifts__title {
-    margin-top: 58px;
-    font-size: clamp(38px, 11vw, 60px);
-  }
-
-  .gifts__text {
-    margin-top: 18px;
-    font-size: 14px;
-    line-height: 1.8;
-    max-width: 560px;
-  }
-
-  .gifts__text + .gifts__text {
-    margin-top: 14px;
-  }
-
-  .gifts__line {
-    display: inline;
-  }
-
-  .gifts__cards {
-    grid-template-columns: minmax(0, 340px);
-    gap: 14px;
-    margin-top: 28px;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .gifts__card {
-    padding: 24px 20px 22px;
-    border-radius: 14px;
-  }
-
-  .gifts__icon {
-    width: 30px;
-  }
-
-  .gifts__card-name {
-    margin-top: 12px;
-    font-size: 20px;
-  }
-
-  .gifts__card-sub {
-    margin-top: 4px;
-    font-size: 13px;
-  }
-
-  .gifts__card-rule {
-    margin: 16px 0;
-  }
-
-  .gifts__row + .gifts__row {
-    margin-top: 6px;
-  }
-
-  .gifts__row dt {
-    font-size: 10px;
-  }
-
-  .gifts__row dd {
-    font-size: 13px;
-  }
-
-  .gifts__copy {
-    gap: 10px;
-    min-height: 48px;
-    margin-top: 20px;
-    padding: 10px 22px;
-    font-size: 11px;
-  }
-
-  .gifts__copy-icon {
-    width: 14px;
+@media (min-width: 1024px) {
+  .gifts__grid {
+    grid-template-columns: 1.1fr 1fr;
+    column-gap: clamp(64px, 8vw, 140px);
   }
 }
