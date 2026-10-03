@@ -1,34 +1,40 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import Countdown from './components/Countdown/Countdown';
-import Timeline from './components/Timeline/Timeline';
-import Details from './components/Details/Details';
+import Celebration from './components/Celebration/Celebration';
+import DressCode from './components/DressCode/DressCode';
 import Menus from './components/Menus/Menus';
+import Photos from './components/Photos/Photos';
 import Playlist from './components/Playlist/Playlist';
 import Gifts from './components/Gifts/Gifts';
 import Faq from './components/Faq/Faq';
 import Rsvp from './components/Rsvp/Rsvp';
-import RsvpModal from './components/Rsvp/RsvpModal';
 import Closing from './components/Closing/Closing';
+import { initSmoothScroll } from './lib/smoothScroll';
 
 export default function App() {
-  const [rsvpOpen, setRsvpOpen] = useState(false);
+  useEffect(() => initSmoothScroll(), []);
 
   return (
     <>
-      <Hero />
+      <a className="skip-link" href="#cuenta-regresiva">
+        Saltar al contenido
+      </a>
+      <Header />
       <main>
+        <Hero />
         <Countdown />
-        <Timeline />
-        <Details />
+        <Celebration />
+        <DressCode />
         <Menus />
+        <Photos />
         <Playlist />
         <Gifts />
         <Faq />
-        <Rsvp onOpen={() => setRsvpOpen(true)} />
+        <Rsvp />
       </main>
       <Closing />
-      <RsvpModal open={rsvpOpen} onClose={() => setRsvpOpen(false)} />
     </>
   );
 }

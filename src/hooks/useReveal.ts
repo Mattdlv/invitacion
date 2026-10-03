@@ -1,6 +1,10 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
 
-/** Adds `is-visible` to every `[data-reveal]` inside the returned ref once it scrolls into view. */
+/**
+ * Marca con `data-visible` cada `[data-reveal]` dentro del ref cuando entra en pantalla.
+ * Es un atributo y no una clase a propósito: React reescribe `className` en cada render
+ * (por ejemplo al abrir una pregunta) y borraría la marca, dejando el elemento invisible.
+ */
 export function useReveal<T extends HTMLElement>() {
   const ref = useRef<T>(null);
 
@@ -12,7 +16,7 @@ export function useReveal<T extends HTMLElement>() {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            entry.target.setAttribute('data-visible', '');
             observer.unobserve(entry.target);
           }
         }

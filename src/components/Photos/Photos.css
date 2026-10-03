@@ -1,0 +1,161 @@
+.photos {
+  overflow: hidden;
+}
+
+.photos .section-head__title em {
+  color: var(--ember);
+}
+
+.photos__grid {
+  display: grid;
+  gap: clamp(56px, 8vw, 96px);
+}
+
+.photos__text {
+  max-width: 34ch;
+  margin-top: clamp(28px, 4vw, 40px);
+}
+
+.photos__steps {
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--night-line);
+  max-width: 440px;
+}
+
+.photos__steps li {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--night-line);
+  font-size: 1.3125rem;
+  line-height: 1.3;
+}
+
+.photos__step-num {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--ember);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Tarjeta del perfil ---------- */
+
+.profile {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 24px;
+  min-height: 340px;
+  padding: clamp(40px, 6vw, 72px) 24px;
+  border: 1px solid var(--night-line);
+  background: var(--night-2);
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    border-color 300ms ease,
+    transform 160ms var(--ease-out);
+}
+
+/* Halo cálido detrás del perfil, como la luz del atardecer de las fotos */
+.profile::before {
+  content: '';
+  position: absolute;
+  inset: auto -20% -60% -20%;
+  z-index: -1;
+  height: 100%;
+  background: radial-gradient(closest-side, rgb(217 180 140 / 0.16), transparent);
+  transition: transform 600ms var(--ease-out);
+}
+
+.profile:active {
+  transform: scale(0.985);
+}
+
+.profile__icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgb(239 232 220 / 0.3);
+  border-radius: 50%;
+  color: var(--ember);
+}
+
+.profile__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.profile__handle {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 1.2rem + 3.6vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.profile__at {
+  font-style: italic;
+  color: var(--ember);
+}
+
+.profile__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--on-night);
+  color: var(--night);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background-color 220ms ease;
+}
+
+.profile__arrow {
+  width: 14px;
+  height: 14px;
+  transition: transform 260ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .profile:hover {
+    border-color: rgb(239 232 220 / 0.32);
+  }
+
+  .profile:hover::before {
+    transform: translateY(-12%);
+  }
+
+  .profile:hover .profile__cta {
+    background: #fff;
+  }
+
+  .profile:hover .profile__arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .photos__grid {
+    grid-template-columns: 1.1fr 1fr;
+    column-gap: clamp(64px, 8vw, 140px);
+    align-items: center;
+  }
+
+  .profile {
+    min-height: 460px;
+  }
+}

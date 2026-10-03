@@ -1,27 +1,28 @@
-import { Fragment, useEffect, useState } from 'react';
-import { countdownTarget, couple } from '../../data/content';
+import { useEffect, useState } from 'react';
+import { ceremonyStart, couple } from '../../data/content';
 import { revealDelay, useReveal } from '../../hooks/useReveal';
-import OrnateFrame from '../OrnateFrame/OrnateFrame';
-import Script from '../Script/Script';
+import { googleCalendarUrl } from '../../lib/calendar';
+import Icon from '../ui/Icon';
+import MaskText from '../ui/MaskText';
 import './Countdown.css';
 
-const target = new Date(countdownTarget).getTime();
+const target = new Date(ceremonyStart).getTime();
 
 function remaining() {
   const diff = Math.max(0, target - Date.now());
   const s = Math.floor(diff / 1000);
-  return [
-    { label: 'Días', value: String(Math.floor(s / 86400)).padStart(2, '0') },
-    { label: 'Horas', value: String(Math.floor((s % 86400) / 3600)).padStart(2, '0') },
-    { label: 'Minutos', value: String(Math.floor((s % 3600) / 60)).padStart(2, '0') },
-    { label: 'Segundos', value: String(s % 60).padStart(2, '0') },
-  ];
+  return {
+    done: diff === 0,
+    units: [
+      { label: 'Días', value: String(Math.floor(s / 86400)).padStart(2, '0') },
+      { label: 'Horas', value: String(Math.floor((s % 86400) / 3600)).padStart(2, '0') },
+      { label: 'Minutos', value: String(Math.floor((s % 3600) / 60)).padStart(2, '0') },
+      { label: 'Segundos', value: String(s % 60).padStart(2, '0') },
+    ],
+  };
 }
 
-/**
- * Un dígito que rueda al cambiar: el saliente sube y sale, el entrante llega desde abajo.
- * El saliente se desmonta solo al terminar su animación.
- */
+/** Un dígito que rueda al cambiar: el saliente sube y sale, el entrante llega desde abajo. */
 function Digit({ char }: { char: string }) {
   const [shown, setShown] = useState(char);
   const [leaving, setLeaving] = useState<string | null>(null);
@@ -41,7 +42,6 @@ function Digit({ char }: { char: string }) {
           key={`out-${leaving}`}
           className="countdown__roll countdown__roll--out"
           onAnimationEnd={() => setLeaving(null)}
-          aria-hidden="true"
         >
           {leaving}
         </span>
@@ -54,68 +54,69 @@ function Digit({ char }: { char: string }) {
 }
 
 export default function Countdown() {
-  const [units, setUnits] = useState(remaining);
+  const [state, setState] = useState(remaining);
   const ref = useReveal<HTMLElement>();
 
   useEffect(() => {
-    const id = window.setInterval(() => setUnits(remaining()), 1000);
-    return () => window.clearInterval(id);
+    // Se alinea al cambio de segundo del reloj para que todos los dígitos giren juntos.
+    let id = 0;
+    const tick = () => {
+      setState(remaining());
+      id = window.setTimeout(tick, 1000 - (Date.now() % 1000));
+    };
+    id = window.setTimeout(tick, 1000 - (Date.now() % 1000));
+    return () => window.clearTimeout(id);
   }, []);
 
   return (
-    <section className="countdown" ref={ref}>
-      <OrnateFrame>
-        <div className="countdown__inner">
-          <Script
-            as="h2"
-            className="countdown__title"
-            text="Nuestro para siempre comienza en..."
-            data-reveal
-          />
+    <section className="section section--night countdown" id="cuenta-regresiva" ref={ref} aria-labelledby="countdown-title">
+      <div className="container countdown__inner">
+        <p className="eyebrow countdown__eyebrow" data-reveal="fade">
+          <span className="eyebrow__rule" aria-hidden="true" />
+          Cuenta regresiva
+          <span className="eyebrow__rule" aria-hidden="true" />
+        </p>
 
-          <div className="countdown__divider" aria-hidden="true" data-reveal style={revealDelay(0.1)}>
-            <span className="countdown__rule" />
-            <svg viewBox="0 0 34 20" fill="none" stroke="currentColor" strokeWidth="0.9">
-              <path d="M4 16c8 1 15-3 26-13" />
-              <path d="M13 12.6c-.6-3 .8-5.4 3.6-6.3.6 2.9-.8 5.3-3.6 6.3z" />
-              <path d="M13 12.6c-2.8.6-5.2-.7-6-3.3 2.8-.9 5.3.5 6 3.3z" />
-              <path d="M21.6 7.2c-.5-2.8.8-5 3.4-5.8.5 2.7-.8 4.9-3.4 5.8z" />
-              <path d="M21.6 7.2c-2.6.5-4.8-.7-5.5-3.1 2.6-.8 4.9.5 5.5 3.1z" />
-            </svg>
-            <span className="countdown__rule" />
-          </div>
+        <MaskText
+          id="countdown-title"
+          className="countdown__title"
+          lines={state.done ? [<em key="h">¡Hoy es el día!</em>] : ['Cada día falta', <em key="p">un poco menos</em>]}
+          delay={0.05}
+        />
 
-          {/* Los números cambian cada segundo: se ocultan al lector de pantalla y
-              debajo va una frase estática equivalente. */}
-          <div className="countdown__units" aria-hidden="true" data-reveal style={revealDelay(0.18)}>
-            {units.map((u, i) => (
-              <Fragment key={u.label}>
-                {i > 0 && (
-                  <span className="countdown__star">
-                    <span className="countdown__star-line" />
-                    <svg viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M8 0c.5 4.2 3.3 7 7.5 7.5C11.3 8 8.5 10.8 8 15c-.5-4.2-3.3-7-7.5-7.5C4.7 7 7.5 4.2 8 0z" />
-                    </svg>
-                    <span className="countdown__star-line" />
-                  </span>
-                )}
-                <div className="countdown__unit">
-                  <span className="countdown__value">
-                    {u.value.split('').map((c, k) => (
-                      <Digit key={k} char={c} />
-                    ))}
-                  </span>
-                  <span className="countdown__label">{u.label}</span>
-                </div>
-              </Fragment>
+        {!state.done && (
+          <div className="countdown__units" aria-hidden="true">
+            {state.units.map((u, i) => (
+              <div key={u.label} className="countdown__unit" data-reveal style={revealDelay(0.15 + i * 0.06)}>
+                <span className="countdown__value">
+                  {u.value.split('').map((c, k) => (
+                    <Digit key={k} char={c} />
+                  ))}
+                </span>
+                <span className="countdown__label">{u.label}</span>
+              </div>
             ))}
           </div>
+        )}
 
-          <p className="sr-only">
-            Faltan {units[0].value} días para la boda, el {couple.displayDate} a las 19:30.
+        {/* Los números cambian cada segundo: el lector de pantalla recibe esta frase estable. */}
+        <p className="sr-only">
+          {state.done
+            ? 'La boda es hoy.'
+            : `Faltan ${Number(state.units[0].value)} días y ${Number(state.units[1].value)} horas para la boda.`}
+        </p>
+
+        <div className="countdown__foot" data-reveal style={revealDelay(0.4)}>
+          <p className="countdown__date">
+            {couple.weekday} {couple.displayDate} <span aria-hidden="true">·</span> 19:30 h
           </p>
+          <a className="btn btn--ghost-light" href={googleCalendarUrl()} target="_blank" rel="noreferrer">
+            <Icon name="calendar" className="btn__icon" />
+            Agendar la fecha
+            <span className="sr-only"> en Google Calendar (se abre en una pestaña nueva)</span>
+          </a>
         </div>
-      </OrnateFrame>
+      </div>
     </section>
   );
 }

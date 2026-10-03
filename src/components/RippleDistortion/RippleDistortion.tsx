@@ -413,8 +413,23 @@ export default function RippleDistortion({
 
     let raf = 0;
     let previousTime = 0;
+    let onScreen = true;
+
+    // Fuera de pantalla no se dibuja: ahorra batería mientras se lee el resto de la página.
+    const visibility = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      if (onScreen && !raf) {
+        previousTime = 0;
+        raf = requestAnimationFrame(loop);
+      }
+    });
+    visibility.observe(mount);
 
     const loop = (now: number) => {
+      if (!onScreen) {
+        raf = 0;
+        return;
+      }
       raf = requestAnimationFrame(loop);
       const delta = previousTime ? Math.min(0.05, (now - previousTime) / 1000) : 0;
       previousTime = now;
@@ -459,6 +474,7 @@ export default function RippleDistortion({
     return () => {
       disposed = true;
       cancelAnimationFrame(raf);
+      visibility.disconnect();
       ro.disconnect();
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('pointerdown', onDown);
