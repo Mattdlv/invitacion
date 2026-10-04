@@ -33,7 +33,8 @@ Todo el contenido está en `src/data/content.ts`. Lo marcado con `PENDIENTE` es 
 - **Instagram para compartir fotos**: `instagram` (perfil, texto y pasos).
 - **Playlist**: `playlist.url` (botón para sumar temas) y `playlist.embedUrl` (reproductor que
   muestra la lista en vivo).
-- **Datos para transferir**: `gifts.alias` y `gifts.holder`. El botón copia el alias.
+- **Regalos**: `gifts.alias`, `gifts.holder` y `gifts.wallet`. El botón copia ese alias.
+- **Tarjeta (valor de los menús)**: `card`, con su propio alias, titular y billetera. Lo usa la calculadora de la confirmación.
 - **Dirección del salón**: `venue.address` (si queda vacío, la fila no se muestra).
 - **Fecha y hora**: `ceremonyStart` / `celebrationEnd` (con zona horaria `-03:00`, así el
   contador es correcto desde cualquier país).

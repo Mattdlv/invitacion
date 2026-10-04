@@ -1,4 +1,4 @@
-import { gifts } from '../../data/content';
+import { card } from '../../data/content';
 import { formatPrice, menuTotal } from '../../lib/menus';
 import CopyAlias from '../ui/CopyAlias';
 
@@ -36,10 +36,12 @@ export default function MenuTotal({ adults, children, live = false }: Props) {
       <div className="menu-total__pay">
         <p className="menu-total__alias">
           <span className="label">Alias para transferir</span>
-          <span className="menu-total__alias-value">{gifts.alias}</span>
-          <span className="menu-total__holder">a nombre de {gifts.holder}</span>
+          <span className="menu-total__alias-value">{card.alias}</span>
+          <span className="menu-total__holder">
+            a nombre de {card.holder} · {card.wallet}
+          </span>
         </p>
-        <CopyAlias />
+        <CopyAlias alias={card.alias} />
       </div>
     </div>
   );

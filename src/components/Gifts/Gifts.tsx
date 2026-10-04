@@ -37,9 +37,13 @@ export default function Gifts() {
               <dt className="label">Titular</dt>
               <dd className="ledger__value">{gifts.holder}</dd>
             </div>
+            <div className="ledger__row">
+              <dt className="label">Billetera</dt>
+              <dd className="ledger__value">{gifts.wallet}</dd>
+            </div>
           </dl>
 
-          <CopyAlias className="ledger__copy" />
+          <CopyAlias alias={gifts.alias} className="ledger__copy" />
         </div>
       </div>
     </section>

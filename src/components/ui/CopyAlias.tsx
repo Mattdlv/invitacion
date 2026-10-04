@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
-import { gifts } from '../../data/content';
 import { copyText } from '../../lib/clipboard';
 import Icon from './Icon';
 import './CopyAlias.css';
 
 type CopyState = 'idle' | 'copied' | 'error';
 
-/** Botón que copia el alias, con su aviso flotante. Se usa en Regalos y en la confirmación. */
-export default function CopyAlias({ className = '' }: { className?: string }) {
+/** Botón que copia un alias, con su aviso flotante. Se usa en Regalos y en la calculadora de la tarjeta. */
+export default function CopyAlias({ alias, className = '' }: { alias: string; className?: string }) {
   const [state, setState] = useState<CopyState>('idle');
   const timer = useRef(0);
 
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
   const copy = async () => {
-    const ok = await copyText(gifts.alias);
+    const ok = await copyText(alias);
     window.clearTimeout(timer.current);
     setState(ok ? 'copied' : 'error');
     timer.current = window.setTimeout(() => setState('idle'), 2400);
@@ -30,11 +29,11 @@ export default function CopyAlias({ className = '' }: { className?: string }) {
         {/* Los dos estados se cruzan con desenfoque: se lee como un solo botón que cambia */}
         <span className="copy-alias__face copy-alias__face--idle" aria-hidden={state === 'copied'}>
           <Icon name="copy" className="btn__icon" />
-          {gifts.copyLabel}
+          Copiar alias
         </span>
         <span className="copy-alias__face copy-alias__face--done" aria-hidden={state !== 'copied'}>
           <Icon name="check" className="btn__icon" />
-          {gifts.copiedLabel}
+          Alias copiado
         </span>
       </button>
 
@@ -43,7 +42,7 @@ export default function CopyAlias({ className = '' }: { className?: string }) {
         {state === 'copied' && (
           <>
             <Icon name="check" className="toast__icon" />
-            {gifts.copiedLabel}: {gifts.alias}
+            Alias copiado: {alias}
           </>
         )}
         {state === 'error' && (

@@ -135,10 +135,17 @@ export const gifts = {
     'Lo importante es tenerlos ahí, celebrando con nosotros hasta el último baile.',
     'Si además desean hacernos un obsequio, pueden hacerlo por transferencia.',
   ],
+  /** Cuenta para los regalos. */
+  alias: 'mf.regalo',
+  holder: 'Matias De la Vega Cervantes',
+  wallet: 'Lemon',
+};
+
+/** Cuenta para abonar la tarjeta (el valor de los menús): la usa la calculadora de la confirmación. */
+export const card = {
   alias: 'mf.tarjeta',
   holder: 'Maria Florencia Ponce',
-  copyLabel: 'Copiar alias',
-  copiedLabel: 'Alias copiado',
+  wallet: 'Mercado Pago',
 };
 
 /* ---------- Preguntas ---------- */
