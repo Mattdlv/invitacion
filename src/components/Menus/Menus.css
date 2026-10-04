@@ -1,0 +1,108 @@
+.menus__head {
+  display: grid;
+  gap: 28px;
+}
+
+.menus__intro {
+  max-width: 40ch;
+}
+
+.menus__cards {
+  display: grid;
+  margin-top: clamp(56px, 7vw, 96px);
+  border-top: 1px solid var(--line-strong);
+}
+
+/* Carta impresa: columnas separadas por filetes, sin cajas ni sombras */
+.menu-card {
+  padding: 36px 0 44px;
+}
+
+.menu-card + .menu-card {
+  border-top: 1px solid var(--line);
+}
+
+.menu-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.menu-card__name {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.menu-card__name em {
+  font-style: italic;
+}
+
+.menu-card__price {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.menu-card__group {
+  margin-top: 28px;
+}
+
+.menu-card__group-title {
+  margin-bottom: 10px;
+}
+
+.menu-card__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-card__items li {
+  padding: 7px 0;
+  font-size: 1.1875rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+
+.menu-card__group:first-of-type .menu-card__items {
+  columns: 1;
+}
+
+@media (min-width: 768px) {
+  .menus__head {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: end;
+    column-gap: clamp(48px, 7vw, 120px);
+  }
+
+  .menus__cards {
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  .menu-card {
+    padding: 44px clamp(28px, 4vw, 64px) 8px 0;
+  }
+
+  .menu-card + .menu-card {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+    padding-left: clamp(28px, 4vw, 64px);
+    padding-right: 0;
+  }
+
+  /* La carta de adultos es larga: en dos columnas se lee de un vistazo */
+  .menu-card:first-child .menu-card__group:first-of-type .menu-card__items {
+    columns: 2;
+    column-gap: 32px;
+  }
+
+  .menu-card__items li {
+    break-inside: avoid;
+  }
+}
